@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Angelo Kannangara – technologist, developer and learner exploring software, AI, physics and robotics.">
+<title>Angelo Kannangara · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#050811; --bg-2:#0a1020; --card:rgba(14,22,42,.55); --line:rgba(160,185,255,.14);
+  --text:#e8edf8; --muted:#8e9bb8; --accent:#ffb454; --accent-2:#7aa2ff;
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'DM Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+  --pad:clamp(20px,5vw,64px); --max:1160px; --r:18px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;height:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:radial-gradient(900px 600px at 80% -5%,rgba(122,162,255,.14),transparent 60%),radial-gradient(700px 500px at -5% 40%,rgba(255,180,84,.07),transparent 60%),radial-gradient(800px 600px at 60% 105%,rgba(90,70,200,.12),transparent 60%);
+  background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(5,8,17,.85);z-index:60}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;font-size:.72rem;color:var(--muted)}
+.wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+section{position:relative;z-index:1;padding:clamp(72px,11vw,140px) 0}
+.idx{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.idx::after{content:"";height:1px;width:64px;background:linear-gradient(90deg,var(--accent),transparent)}
+h2{font-size:clamp(1.9rem,4.4vw,3.1rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:0 0 28px;max-width:20ch}
+
+/* Header */
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;background:rgba(5,8,17,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:var(--max);margin:0 auto;padding:14px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800;letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px}
+.brand b{color:var(--accent)}
+.links{display:flex;gap:28px;font-size:.88rem;color:var(--muted)}
+.links a{transition:color .25s}.links a:hover{color:var(--text)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.snd{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .25s,background .25s}
+.snd:hover{border-color:var(--accent-2)}
+.snd i{width:6px;height:6px;border-radius:50%;background:var(--muted);transition:.3s}
+.snd[aria-pressed="true"]{border-color:var(--accent);background:rgba(255,180,84,.08)}
+.snd[aria-pressed="true"] i{background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.burger{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:12px;background:transparent;cursor:pointer;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--text);transition:.3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:24px}
+.burger[aria-expanded="true"] span:nth-child(1){top:20px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){top:20px;transform:rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:45;background:rgba(5,8,17,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);gap:6px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.drawer.open{opacity:1;visibility:visible}
+.drawer a{font-size:clamp(1.8rem,8vw,2.6rem);font-weight:600;letter-spacing:-.03em;padding:8px 0;border-bottom:1px solid var(--line);transform:translateY(14px);opacity:0;transition:transform .5s,opacity .5s}
+.drawer.open a{transform:none;opacity:1}
+.drawer a small{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-right:14px;vertical-align:middle}
+
+/* Hero */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;color:var(--accent)}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+h1{font-size:clamp(2.8rem,8vw,6rem);font-weight:800;letter-spacing:-.05em;line-height:.98;margin:0 0 28px;background:linear-gradient(180deg,#fff 30%,#8fa6d9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--muted);max-width:54ch;font-weight:300}
+.lead strong{color:var(--text);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:.92rem;border:1px solid var(--line);transition:.3s}
+.btn.pri{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.pri:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.btn.sec:hover{border-color:var(--accent-2);background:rgba(122,162,255,.08)}
+.meta{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:52px;padding-top:22px;border-top:1px solid var(--line)}
+.meta div{display:flex;flex-direction:column;gap:4px}
+.meta span:last-child{font-size:.92rem}
+.orbit{width:100%;max-width:480px;justify-self:center;aspect-ratio:1}
+.orbit svg{width:100%;height:100%;overflow:visible}
+.orbit .spin{transform-box:fill-box;transform-origin:center;animation:spin 60s linear infinite}
+.orbit .spin.r{animation-duration:90s;animation-direction:reverse}
+.orbit .spin.f{animation-duration:24s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%)}
+
+/* About */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(32px,6vw,80px);align-items:start}
+.about p{color:var(--muted);font-weight:300;font-size:1.05rem;margin:0 0 18px}
+.about p strong{color:var(--text);font-weight:500}
+.edu{display:grid;gap:14px}
+.edu div{padding:20px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.edu h3{margin:6px 0 4px;font-size:1.02rem;font-weight:600}
+.edu p{margin:0;font-size:.88rem}
+blockquote{grid-column:1/-1;margin:clamp(24px,4vw,48px) 0 0;padding:clamp(28px,5vw,56px);border:1px solid var(--line);border-radius:calc(var(--r) + 6px);background:radial-gradient(500px 220px at 90% 0,rgba(255,180,84,.1),transparent),var(--card);font-size:clamp(1.4rem,3.2vw,2.3rem);font-weight:300;letter-spacing:-.02em;line-height:1.25}
+blockquote cite{display:block;margin-top:18px;font-style:normal}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.card{position:relative;padding:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:12px;overflow:hidden;transition:transform .35s,border-color .35s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(320px 200px at var(--mx,80%) var(--my,0%),rgba(122,162,255,.14),transparent 70%);opacity:0;transition:opacity .35s;pointer-events:none}
+.card:hover{transform:translateY(-4px);border-color:rgba(122,162,255,.4)}
+.card:hover::before{opacity:1}
+.card h3{margin:0;font-size:1.25rem;font-weight:600;letter-spacing:-.02em}
+.card p{margin:0;color:var(--muted);font-size:.94rem;font-weight:300}
+.card .top{display:flex;justify-content:space-between;align-items:center}
+.card .arrow{color:var(--accent);transition:transform .3s}.card:hover .arrow{transform:translate(3px,-3px)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:10px}
+.tags span{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--accent-2)}
+.feat{grid-column:span 2}
+.skill{padding:24px}
+.skill .n{color:var(--accent)}
+
+/* Timeline */
+.tl{position:relative;display:grid;gap:34px;padding-left:34px;max-width:760px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--accent),var(--line) 70%,transparent)}
+.tl article{position:relative}
+.tl article::before{content:"";position:absolute;left:-34px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--accent);box-shadow:0 0 14px rgba(255,180,84,.5)}
+.tl h3{margin:6px 0;font-size:1.3rem;font-weight:600;letter-spacing:-.02em}
+.tl p{margin:0;color:var(--muted);font-weight:300;max-width:58ch}
+
+/* Contact */
+.contact{text-align:center}
+.contact h2{margin:0 auto 22px;max-width:16ch;font-size:clamp(2.2rem,6vw,4.4rem)}
+.contact p{color:var(--muted);max-width:48ch;margin:0 auto 34px;font-weight:300}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+  .links{display:none}.burger{display:block}
+  .hero .wrap,.about{grid-template-columns:1fr}
+  .orbit{max-width:340px;order:-1;margin-bottom:-10px}
+  .feat{grid-column:auto}
+  .hint{display:none}
+}
+@media(max-width:420px){.snd{padding:8px 11px}.brand span.mono{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.orbit .spin{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand">AK<b>.</b><span class="mono">Portfolio</span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#about">About</a><a href="#work">Selected Work</a><a href="#focus">Focus</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-r">
+      <button class="snd" id="snd" aria-pressed="false" aria-label="Toggle ambient sound"><i></i><span id="sndTxt">SOUND: OFF</span></button>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <a href="#about"><small>01</small>About</a>
+  <a href="#work"><small>02</small>Selected Work</a>
+  <a href="#focus"><small>03</small>Focus</a>
+  <a href="#journey"><small>04</small>Journey</a>
+  <a href="#contact"><small>05</small>Contact</a>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow mono rv">A curious mind in a vast universe</div>
+        <h1 class="rv">Building<br>what’s next.</h1>
+        <p class="lead rv"><strong>Angelo Kannangara</strong> is a technologist, developer, and lifelong learner exploring the edges of <strong>software</strong>, <strong>artificial intelligence</strong>, <strong>physics</strong>, and <strong>robotics</strong> — building tools that connect the digital and physical worlds.</p>
+        <div class="cta rv">
+          <a class="btn pri" href="#work">Explore work →</a>
+          <a class="btn sec" href="#contact">Get in touch</a>
+        </div>
+        <div class="meta rv">
+          <div><span class="mono">Currently</span><span>Learning. Building. Exploring.</span></div>
+          <div><span class="mono">Based in</span><span>Sri Lanka · Earth</span></div>
+        </div>
+      </div>
+      <div class="orbit rv" aria-hidden="true">
+        <svg viewBox="-250 -250 500 500" fill="none">
+          <defs>
+            <radialGradient id="core"><stop offset="55%" stop-color="#000"/><stop offset="100%" stop-color="#050811"/></radialGradient>
+            <linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="#ffb454" stop-opacity="0"/><stop offset=".5" stop-color="#ffb454"/><stop offset="1" stop-color="#7aa2ff" stop-opacity=".2"/></linearGradient>
+          </defs>
+          <circle r="230" stroke="rgba(160,185,255,.1)"/>
+          <circle r="170" stroke="rgba(160,185,255,.14)" stroke-dasharray="2 8"/>
+          <g class="spin r"><ellipse rx="225" ry="70" stroke="rgba(122,162,255,.35)" transform="rotate(-18)"/><circle cx="-214" cy="-6" r="3.5" fill="#7aa2ff"/></g>
+          <g class="spin"><ellipse rx="200" ry="52" stroke="url(#ring)" stroke-width="1.5" transform="rotate(14)"/><ellipse rx="150" ry="36" stroke="rgba(255,180,84,.35)" transform="rotate(14)"/></g>
+          <g class="spin f"><circle cx="0" cy="-170" r="4" fill="#ffb454"/></g>
+          <circle r="78" fill="url(#core)" stroke="rgba(255,180,84,.7)" stroke-width="1.5"/>
+          <circle r="86" stroke="rgba(255,180,84,.25)"/>
+          <path d="M-250 0H250M0-250V250" stroke="rgba(160,185,255,.07)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="hint mono">Scroll ↓</div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="idx mono rv">01 / About</div>
+      <h2 class="rv">Bridging computing and the physical sciences.</h2>
+      <div class="about">
+        <div class="rv">
+          <p>I’m pursuing two undergraduate degrees in parallel — a <strong>BSc in Physical Science</strong> and a <strong>Bachelor of Information Technology</strong> — because the most interesting problems live where code meets the laws of nature.</p>
+          <p>Physics teaches me how the universe behaves; software lets me model it, automate it, and build with it. From educational platforms to embedded robots, I like turning curiosity into things that actually run.</p>
+        </div>
+        <div class="edu rv">
+          <div><span class="mono">University of Sri Jayewardenepura</span><h3>BSc Physical Science</h3><p>Mathematics, Physics, and Electronics &amp; Embedded Systems.</p></div>
+          <div><span class="mono">University of Moratuwa</span><h3>Bachelor of Information Technology</h3><p>Software engineering, systems, and applied computing.</p></div>
+        </div>
+        <blockquote class="rv">“We are a way for the cosmos to know itself.”<cite class="mono">— Carl Sagan</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="idx mono rv">02 / Selected Work</div>
+      <h2 class="rv">Things I’ve built and explored.</h2>
+      <div class="grid">
+        <a class="card feat rv" href="https://angelokannangara.github.io/mathlanka/" target="_blank" rel="noopener">
+          <div class="top"><span class="mono">Education · Live</span><span class="arrow">↗</span></div>
+          <h3>MathLanka <span class="mono">mathlk.online</span></h3>
+          <p>An educational platform for Sri Lankan students — making mathematics accessible, structured, and engaging with resources tailored to the local curriculum.</p>
+          <div class="tags"><span>Web</span><span>HTML / CSS / JS</span><span>Education</span></div>
+        </a>
+        <article class="card rv">
+          <div class="top"><span class="mono">Civic Tech</span><span class="arrow">↗</span></div>
+          <h3>Ape Para</h3>
+          <p>A C# Windows Forms and cross-platform civic infrastructure reporting tool that helps communities flag and track local issues.</p>
+          <div class="tags"><span>C#</span><span>Windows Forms</span><span>Cross-platform</span></div>
+        </article>
+        <article class="card rv">
+          <div class="top"><span class="mono">Intelligence</span><span class="arrow">↗</span></div>
+          <h3>AI &amp; RAG Explorations</h3>
+          <p>Experiments with retrieval-augmented generation and intelligent assistants that reason over custom knowledge.</p>
+          <div class="tags"><span>Python</span><span>RAG</span><span>LLMs</span></div>
+        </article>
+        <article class="card rv">
+          <div class="top"><span class="mono">Hardware</span><span class="arrow">↗</span></div>
+          <h3>Autonomous Systems</h3>
+          <p>ESP32-powered robotics and embedded systems — sensing, deciding, and moving in the real world.</p>
+          <div class="tags"><span>ESP32</span><span>Embedded</span><span>Robotics</span></div>
+        </article>
+        <article class="card rv">
+          <div class="top"><span class="mono">Science</span><span class="arrow">↗</span></div>
+          <h3>Python Experiments</h3>
+          <p>Scientific and problem-solving tools: simulations, numerical methods, and small utilities born from curiosity.</p>
+          <div class="tags"><span>Python</span><span>Simulation</span><span>Problem solving</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="wrap">
+      <div class="idx mono rv">03 / Areas of Focus</div>
+      <h2 class="rv">Where my curiosity points.</h2>
+      <div class="grid">
+        <div class="card skill rv"><span class="mono n">F.01</span><h3>Artificial Intelligence &amp; ML</h3><p>Machine learning, RAG pipelines, and intelligent assistants.</p></div>
+        <div class="card skill rv"><span class="mono n">F.02</span><h3>Robotics &amp; Embedded Systems</h3><p>Microcontrollers, sensors, and autonomous behaviour.</p></div>
+        <div class="card skill rv"><span class="mono n">F.03</span><h3>Physics &amp; Mathematics</h3><p>First-principles thinking, modelling, and analysis.</p></div>
+        <div class="card skill rv"><span class="mono n">F.04</span><h3>Software &amp; Web Development</h3><p>Clean, responsive interfaces and reliable applications.</p></div>
+        <div class="card skill rv"><span class="mono n">F.05</span><h3>Scientific Computing</h3><p>Numerical methods and simulation in Python.</p></div>
+        <div class="card skill rv"><span class="mono n">F.06</span><h3>Engineering Prototyping</h3><p>Rapidly taking ideas from sketch to working hardware.</p></div>
+        <div class="card skill rv"><span class="mono n">F.07</span><h3>Research</h3><p>Reading deeply, asking better questions, testing ideas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap">
+      <div class="idx mono rv">04 / Journey</div>
+      <h2 class="rv">An academic trajectory across two disciplines.</h2>
+      <div class="tl">
+        <article class="rv"><span class="mono">Ongoing · Computing</span><h3>Bachelor of Information Technology</h3><p>University of Moratuwa — building a foundation in software, systems, and applied computing.</p></article>
+        <article class="rv"><span class="mono">Ongoing · Science</span><h3>BSc Physical Science</h3><p>University of Sri Jayewardenepura — Mathematics, Physics, and Electronics &amp; Embedded Systems.</p></article>
+        <article class="rv"><span class="mono">Always · Beyond the classroom</span><h3>Projects, experiments &amp; research</h3><p>Educational platforms, civic tools, AI assistants, and ESP32 robots — learning by building.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="idx mono rv" style="justify-content:center">05 / Contact</div>
+      <h2 class="rv">Let’s explore something together.</h2>
+      <p class="rv">Open to collaborations, ideas, and conversations about technology, science, and the universe we live in.</p>
+      <a class="btn pri rv" href="https://www.linkedin.com/in/angelo-kannangara" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+      <p class="mono rv" style="margin-top:36px">7.8731° N · 80.7718° E</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© <span id="yr">2026</span> Angelo Kannangara</span>
+    <span class="mono">Sri Lanka · Earth</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* Reveal on scroll */
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    rv.forEach(function(el,i){ el.style.transitionDelay = (i%4)*60+'ms'; io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* Card spotlight */
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove', function(e){
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX-r.left)+'px');
+      c.style.setProperty('--my', (e.clientY-r.top)+'px');
+    });
+  });
+
+  /* Mobile drawer */
+  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
+  function setMenu(open){
+    drawer.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    drawer.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    drawer.querySelectorAll('a').forEach(function(a,i){ a.style.transitionDelay = open ? (80+i*60)+'ms' : '0ms'; });
+  }
+  burger.addEventListener('click', function(){ setMenu(!drawer.classList.contains('open')); });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape') setMenu(false); });
+  window.addEventListener('resize', function(){ if (window.innerWidth>900) setMenu(false); });
+
+  /* Starfield */
+  var cv = document.getElementById('stars'), ctx = cv.getContext('2d');
+  var stars = [], W, H, dpr, scrollY = 0;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n = Math.round(Math.min(220, W*H/7000));
+    stars = [];
+    for (var i=0;i<n;i++){
+      stars.push({x:Math.random()*W, y:Math.random()*H, z:Math.random()*.9+.1,
+        r:Math.random()*1.2+.2, p:Math.random()*Math.PI*2, s:Math.random()*.6+.2,
+        vx:(Math.random()-.5)*.08, vy:(Math.random()-.5)*.08});
+    }
+  }
+  window.addEventListener('resize', resize);
+  window.addEventListener('scroll', function(){ scrollY = window.pageYOffset; }, {passive:true});
+  var t0 = 0;
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    for (var i=0;i<stars.length;i++){
+      var s = stars[i];
+      if (!reduce){ s.x += s.vx*s.z; s.y += s.vy*s.z; }
+      if (s.x<-5) s.x=W+5; if (s.x>W+5) s.x=-5;
+      if (s.y<-5) s.y=H+5; if (s.y>H+5) s.y=-5;
+      var py = ((s.y - scrollY*s.z*.25) % H + H) % H;
+      var a = .25 + .55*(.5+.5*Math.sin(t*.001*s.s + s.p))*s.z + .1;
+      ctx.beginPath();
+      ctx.fillStyle = (i%9===0) ? 'rgba(255,200,130,'+a+')' : 'rgba(200,215,255,'+a+')';
+      ctx.arc(s.x, py, s.r*s.z+.2, 0, 6.2832);
+      ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  resize();
+  if (reduce) frame(0); else requestAnimationFrame(frame);
+
+  /* Ambient drone (Web Audio) */
+  var btn = document.getElementById('snd'), txt = document.getElementById('sndTxt');
+  var ac = null, master = null, nodes = [], on = false, stopTimer = null;
+
+  function impulse(ctx, secs, decay){
+    var len = ctx.sampleRate*secs, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (var c=0;c<2;c++){ var d = buf.getChannelData(c);
+      for (var i=0;i<len;i++) d[i] = (Math.random()*2-1)*Math.pow(1-i/len, decay); }
+    return buf;
+  }
+  function build(){
+    ac = new (window.AudioContext||window.webkitAudioContext)();
+    master = ac.createGain(); master.gain.value = 0;
+    var filter = ac.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 700; filter.Q.value = .6;
+    var lfo = ac.createOscillator(), lfoG = ac.createGain();
+    lfo.frequency.value = .07; lfoG.gain.value = 280; lfo.connect(lfoG); lfoG.connect(filter.frequency); lfo.start();
+    var verb = ac.createConvolver(); verb.buffer = impulse(ac, 6, 2.6);
+    var wet = ac.createGain(); wet.gain.value = .75;
+    var dry = ac.createGain(); dry.gain.value = .35;
+    filter.connect(dry); filter.connect(verb); verb.connect(wet);
+    dry.connect(master); wet.connect(master); master.connect(ac.destination);
+    /* Dm9-flavoured organ pad: D1 D2 A2 D3 F3 A3 E4 */
+    var chord = [36.71,73.42,110,146.83,174.61,220,329.63];
+    var gains = [.5,.45,.3,.25,.18,.14,.08];
+    chord.forEach(function(f,i){
+      [-9,0,8].forEach(function(cents,j){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.type = i<2 ? 'sine' : (j===1 ? 'triangle' : 'sawtooth');
+        o.frequency.value = f; o.detune.value = cents + (Math.random()*4-2);
+        g.gain.value = gains[i]*(o.type==='sawtooth'?.35:.7)/3;
+        var dl = ac.createOscillator(), dg = ac.createGain();
+        dl.frequency.value = .05+Math.random()*.12; dg.gain.value = 4; dl.connect(dg); dg.connect(o.detune); dl.start();
+        o.connect(g); g.connect(filter); o.start(); nodes.push(o, dl);
+      });
+    });
+    nodes.push(lfo);
+  }
+  function setOn(v){
+    on = v;
+    btn.setAttribute('aria-pressed', v);
+    txt.textContent = v ? 'SOUND: ON' : 'SOUND: OFF';
+    if (v){
+      clearTimeout(stopTimer);
+      if (!ac) build();
+      if (ac.state==='suspended') ac.resume();
+      var t = ac.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(.42, t+4);
+    } else if (ac){
+      var t2 = ac.currentTime;
+      master.gain.cancelScheduledValues(t2);
+      master.gain.setValueAtTime(master.gain.value, t2);
+      master.gain.linearRampToValueAtTime(0, t2+2.2);
+      stopTimer = setTimeout(function(){ if (!on && ac.state==='running') ac.suspend(); }, 2500);
+    }
+  }
+  btn.addEventListener('click', function(){
+    if (!(window.AudioContext||window.webkitAudioContext)){ txt.textContent = 'SOUND: N/A'; return; }
+    try { setOn(!on); } catch(e){ txt.textContent = 'SOUND: N/A'; }
+  });
+})();
+</script>
+</body>
+</html>
